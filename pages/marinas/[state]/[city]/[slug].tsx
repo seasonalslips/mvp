@@ -1,17 +1,17 @@
 import Head from "next/head"; // adjust if needed
 
-export default function MarinaPage({ marinas, state, city, slug }: any) {
-  if (!marinas) {
-    return (
-      <main style={{ padding: 24, fontFamily: "system-ui" }}>
-        <h1>Marina not found</h1>
-        <p>
-          Looking for: {state}/{city}/{slug}
-        </p>
-      
-      </main>
-    );
+export default function MarinaPage({ marina }: any) {
+  if (!marina) {
+    return <main><h1>Marina not found</h1></main>;
   }
+
+  return (
+    <main>
+      <h1>{marina.name}</h1>
+      <p>{marina.description}</p>
+    </main>
+  );
+}
 
   const title = `${marinas.name} – Boat Slips in ${city}, ${state.toUpperCase()}`;
   const description =
@@ -40,13 +40,7 @@ export default function MarinaPage({ marinas, state, city, slug }: any) {
 export async function getServerSideProps(context: any) {
   const { state, city, slug } = context.params;
 
-  const marina =
-    marinas.find(
-      (m: any) =>
-        String(m.state).toLowerCase() === String(state).toLowerCase() &&
-        String(m.city).toLowerCase() === String(city).toLowerCase() &&
-        String(m.slug).toLowerCase() === String(slug).toLowerCase()
-    ) || null;
+ 
 
   return {
     props: { marinas, state, city, slug },
