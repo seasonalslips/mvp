@@ -22,13 +22,18 @@ export default function MarinaPage({
 }) {
   const marinas = loadMarinas();
 
-  const marina = marinas.find((m) => {
-    return (
-      (m.state ?? "").toLowerCase() === params.state.toLowerCase() &&
-      (m.city ?? "").toLowerCase() === params.city.toLowerCase() &&
-      (m.slug ?? "").toLowerCase() === params.slug.toLowerCase()
-    );
-  });
+ const marina = marinas.find((m: any) => {
+  const s = String(m?.state ?? "").toLowerCase();
+  const c = String(m?.city ?? "").toLowerCase();
+  const sl = String(m?.slug ?? "").toLowerCase();
+
+  return (
+    s === String(params.state ?? "").toLowerCase() &&
+    c === String(params.city ?? "").toLowerCase() &&
+    sl === String(params.slug ?? "").toLowerCase()
+  );
+});
+
 
   if (!marina) {
     return (
