@@ -1,16 +1,24 @@
-// app/marinas/[state]/[city]/[slug]/page.tsx
+import marinas from "../../../../../data/marinas.json";
 
 export default async function MarinaPage({
   params,
 }: {
   params: { state: string; city: string; slug: string };
 }) {
-  // TEMP: hardcoded example to prove SSR works
-  const marina = {
-    name: "Reserve Marina",
-    description:
-      "Reserve Marina in Spicewood, TX offers seasonal and annual boat slips with easy access to Lake Travis.",
-  };
+  const marina = marinas.find(
+    (m) =>
+      m.state === params.state &&
+      m.city === params.city &&
+      m.slug === params.slug
+  );
+
+  if (!marina) {
+    return (
+      <main style={{ padding: 24, fontFamily: "system-ui" }}>
+        <h1>Marina not found</h1>
+      </main>
+    );
+  }
 
   return (
     <main style={{ padding: 24, fontFamily: "system-ui" }}>
