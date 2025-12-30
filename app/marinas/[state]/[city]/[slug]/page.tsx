@@ -1,11 +1,28 @@
-import marinas from "../../../../../data/marinas.json";
+import fs from "fs";
+import path from "path";
+
+type Marina = {
+  state: string;
+  city: string;
+  slug: string;
+  name: string;
+  description: string;
+};
+
+function loadMarinas(): Marina[] {
+  const filePath = path.join(process.cwd(), "data", "marinas.json");
+  const raw = fs.readFileSync(filePath, "utf8");
+  return JSON.parse(raw) as Marina[];
+}
 
 export default function MarinaPage({
   params,
 }: {
   params: { state: string; city: string; slug: string };
 }) {
-  const marina = marinas.find((m: any) => {
+  const marinas = loadMarinas();
+
+  const marina = marinas.find((m) => {
     return (
       (m.state ?? "").toLowerCase() === params.state.toLowerCase() &&
       (m.city ?? "").toLowerCase() === params.city.toLowerCase() &&
@@ -21,7 +38,7 @@ export default function MarinaPage({
           Looking for: <b>{params.state}</b> / <b>{params.city}</b> /{" "}
           <b>{params.slug}</b>
         </p>
-        <p>JSON records loaded: {(marinas as any[]).length}</p>
+        <p>Records loaded: {marinas.length}</p>
       </main>
     );
   }
