@@ -13,6 +13,8 @@ const marina = marinas.find((m) => {
   );
 });
 
+console.log("PARAMS:", params);
+console.log("FIRST MARINA:", marinas[0]);
 
   if (!marina) {
     return (
