@@ -1,4 +1,4 @@
-import marinas from "@/data/marinas.json";
+import marinas from "../../../../../data/marinas.json";
 
 export default async function MarinaPage({
   params,
