@@ -2,11 +2,11 @@ import fs from "fs";
 import path from "path";
 
 type Marina = {
-  state: string;
-  city: string;
-  slug: string;
-  name: string;
-  description: string;
+  state?: string;
+  city?: string;
+  slug?: string;
+  name?: string;
+  description?: string;
 };
 
 function loadMarinas(): Marina[] {
@@ -22,18 +22,19 @@ export default function MarinaPage({
 }) {
   const marinas = loadMarinas();
 
- const marina = marinas.find((m: any) => {
-  const s = String(m?.state ?? "").toLowerCase();
-  const c = String(m?.city ?? "").toLowerCase();
-  const sl = String(m?.slug ?? "").toLowerCase();
+  const bad = marinas.filter((m) => !(m?.state && m?.city && m?.slug));
 
-  return (
-    s === String(params.state ?? "").toLowerCase() &&
-    c === String(params.city ?? "").toLowerCase() &&
-    sl === String(params.slug ?? "").toLowerCase()
-  );
-});
+  const marina = marinas.find((m: any) => {
+    const s = String(m?.state ?? "").toLowerCase();
+    const c = String(m?.city ?? "").toLowerCase();
+    const sl = String(m?.slug ?? "").toLowerCase();
 
+    return (
+      s === String(params.state ?? "").toLowerCase() &&
+      c === String(params.city ?? "").toLowerCase() &&
+      sl === String(params.slug ?? "").toLowerCase()
+    );
+  });
 
   if (!marina) {
     return (
@@ -44,6 +45,7 @@ export default function MarinaPage({
           <b>{params.slug}</b>
         </p>
         <p>Records loaded: {marinas.length}</p>
+        <p>Bad records missing state/city/slug: {bad.length}</p>
       </main>
     );
   }
