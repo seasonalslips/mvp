@@ -1,7 +1,7 @@
 import Head from "next/head"; // adjust if needed
 
 export default function MarinaPage({ marinas, state, city, slug }: any) {
-  if (!marina) {
+  if (!marinas) {
     return (
       <main style={{ padding: 24, fontFamily: "system-ui" }}>
         <h1>Marina not found</h1>
@@ -13,7 +13,7 @@ export default function MarinaPage({ marinas, state, city, slug }: any) {
     );
   }
 
-  const title = `${marina.name} – Boat Slips in ${city}, ${state.toUpperCase()}`;
+  const title = `${marinas.name} – Boat Slips in ${city}, ${state.toUpperCase()}`;
   const description =
     marina.description ||
     `${marina.name} in ${city}, ${state.toUpperCase()} offers seasonal and annual boat slips.`;
@@ -30,7 +30,7 @@ export default function MarinaPage({ marinas, state, city, slug }: any) {
       </Head>
 
       <main style={{ padding: 24, fontFamily: "system-ui" }}>
-        <h1>{marina.name}</h1>
+        <h1>{marinas.name}</h1>
         <p>{description}</p>
       </main>
     </>
