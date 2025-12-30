@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import fs from "fs";
 import path from "path";
 
@@ -15,9 +18,8 @@ function loadMarinas(): Marina[] {
   return JSON.parse(raw) as Marina[];
 }
 
-export default function MarinaPage({
-  params,
-}: {
+export default function MarinaPage({ params }: { params: { state?: string; city?: string; slug?: string } }) {
+
   params: { state: string; city: string; slug: string };
 }) {
   const marinas = loadMarinas();
@@ -38,10 +40,12 @@ export default function MarinaPage({
     return (
       <main style={{ padding: 24, fontFamily: "system-ui" }}>
         <h1>Marina not found</h1>
-        <p>
-          Looking for: <b>{params.state}</b> / <b>{params.city}</b> /{" "}
-          <b>{params.slug}</b>
-        </p>
+       <p>
+  Looking for: <b>{params?.state ?? "(missing)"}</b> /{" "}
+  <b>{params?.city ?? "(missing)"}</b> /{" "}
+  <b>{params?.slug ?? "(missing)"}</b>
+</p>
+
         <p>Records loaded: {marinas.length}</p>
       </main>
     );
