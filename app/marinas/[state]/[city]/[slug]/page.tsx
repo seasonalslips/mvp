@@ -1,12 +1,15 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import fs from "fs";
 import path from "path";
 
 type Marina = {
-  state: string;
-  city: string;
-  slug: string;
-  name: string;
-  description: string;
+  state?: string;
+  city?: string;
+  slug?: string;
+  name?: string;
+  description?: string;
 };
 
 function loadMarinas(): Marina[] {
@@ -15,18 +18,23 @@ function loadMarinas(): Marina[] {
   return JSON.parse(raw) as Marina[];
 }
 
-export default function MarinaPage({
+export default function Page({
   params,
 }: {
-  params: { state: string; city: string; slug: string };
+  params: { state?: string; city?: string; slug?: string };
 }) {
   const marinas = loadMarinas();
 
+  // Debug: show what Next is passing
+  const state = (params.state ?? "").toLowerCase();
+  const city = (params.city ?? "").toLowerCase();
+  const slug = (params.slug ?? "").toLowerCase();
+
   const marina = marinas.find((m) => {
     return (
-      (m.state ?? "").toLowerCase() === params.state.toLowerCase() &&
-      (m.city ?? "").toLowerCase() === params.city.toLowerCase() &&
-      (m.slug ?? "").toLowerCase() === params.slug.toLowerCase()
+      String(m.state ?? "").toLowerCase() === state &&
+      String(m.city ?? "").toLowerCase() === city &&
+      String(m.slug ?? "").toLowerCase() === slug
     );
   });
 
@@ -35,8 +43,9 @@ export default function MarinaPage({
       <main style={{ padding: 24, fontFamily: "system-ui" }}>
         <h1>Marina not found</h1>
         <p>
-          Looking for: <b>{params.state}</b> / <b>{params.city}</b> /{" "}
-          <b>{params.slug}</b>
+          Looking for: <b>{params.state ?? "(missing)"}</b> /{" "}
+          <b>{params.city ?? "(missing)"}</b> /{" "}
+          <b>{params.slug ?? "(missing)"}</b>
         </p>
         <p>Records loaded: {marinas.length}</p>
       </main>
@@ -50,4 +59,3 @@ export default function MarinaPage({
     </main>
   );
 }
-
