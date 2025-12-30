@@ -8,7 +8,7 @@ export default function MarinaPage({ marina, state, city, slug }: any) {
         <p>
           Looking for: {state}/{city}/{slug}
         </p>
-        <p>Records loaded: {marinas.length}</p>
+      
       </main>
     );
   }
