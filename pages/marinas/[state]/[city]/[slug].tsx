@@ -1,5 +1,4 @@
-import Head from "next/head";
-import marinas from "../../../data/marinas.json"; // adjust if needed
+import Head from "next/head"; // adjust if needed
 
 export default function MarinaPage({ marina, state, city, slug }: any) {
   if (!marina) {
