@@ -1,6 +1,6 @@
 import Head from "next/head"; // adjust if needed
 
-export default function MarinaPage({ marina, state, city, slug }: any) {
+export default function MarinaPage({ marinas, state, city, slug }: any) {
   if (!marina) {
     return (
       <main style={{ padding: 24, fontFamily: "system-ui" }}>
@@ -49,6 +49,6 @@ export async function getServerSideProps(context: any) {
     ) || null;
 
   return {
-    props: { marina, state, city, slug },
+    props: { marinas, state, city, slug },
   };
 }
