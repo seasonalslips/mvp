@@ -1,5 +1,6 @@
 import Link from "next/link";
-import type { Marina } from "../pages";
+import type { Marina } from "../types/marina";
+
 
 type Props = {
   marinas: Marina[];
