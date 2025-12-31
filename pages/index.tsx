@@ -31,29 +31,29 @@ export default function Home() {
     },
   ];
 
-  return (
-    <>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <link rel="canonical" href="https://seasonalslips.com/" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-      </Head>
+ return (
+  <>
+    <Head>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
+      />
+    </Head>
 
-      <div className="min-h-screen">
-        <AnnouncementBanner />
-        <Hero />
-        <FeaturedLocations />
-        <HowItWorks />
-        <Benefits />
-        <SponsorshipSection />
-        <BlogPreview />
-        <FinalCTA />
-        <Footer />
-      </div>
-    </>
-  );
-}
+    <main className="min-h-screen">
+      <AnnouncementBanner />
+      <Hero />
+      <FeaturedLocations />
+      <HowItWorks />
+      <Benefits />
+      <SponsorshipSection />
+      <BlogPreview />
+      <FinalCTA />
+      <Footer />
+    </main>
+  </>
+);
