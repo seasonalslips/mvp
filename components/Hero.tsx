@@ -1,12 +1,20 @@
 export default function Hero() {
   return (
-    <section className="py-24">
-      <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold">SeasonalSlips</h1>
-        <p className="mt-4 text-lg text-muted-foreground">
-          Find annual & seasonal boat slips.
-        </p>
-      </div>
+    <section style={{ padding: 48 }}>
+      <h1>Find Annual & Seasonal Boat Slips</h1>
+      <p>
+        Browse marinas offering long-term and seasonal slips by city and state.
+      </p>
+
+      <form style={{ marginTop: 24 }}>
+        <input
+          placeholder="Search by city, state, or marina"
+          style={{ padding: 12, width: 320 }}
+        />
+        <button style={{ marginLeft: 12, padding: 12 }}>
+          Search
+        </button>
+      </form>
     </section>
   );
 }
